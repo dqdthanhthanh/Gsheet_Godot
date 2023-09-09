@@ -10,7 +10,7 @@ var amount = ""
 var desc = ""
 var respheader = ""
 var SEND = false
-var apiurl = "https://script.google.com/macros/s/AKfycbwNyfgHW1uRnNiw-8_8jrkPzKqffpDtHROVRsAQl2cD451qHlFq_kiyFQ8h3zil0y8EJg/exec"
+var apiurl = "https://script.google.com/macros/s/AKfycbysOVA-CmX8jrISj1Tl39ChQJs0vzpYKa2ksde6iLq_WqblQeFKA-Mp9AQ5eMdh9PImyQ/exec"
 var geturl = apiurl+"?sheetname="+sheetname
 
 func _ready():
