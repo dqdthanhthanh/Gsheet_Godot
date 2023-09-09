@@ -29,9 +29,8 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		if response_code == 200:
 			$Label.text = "Fetched: "+sheetname
 			var data = body.get_string_from_utf8()
-			data = data.replace("[","").replace("]","")
-			data = parse_json(data)
-			#print(data)
+			data = parse_json(data)[0]
+#			print(data)
 			$CASH_IN_HAND.text = "CASH IN HAND:  "+str(data["TOTAL_CASH_IN_HAND"])
 			$TOTAL_INCOME.text = "TOTAL INCOME:  "+str(data["TOTAL_INCOME"])
 			$TOTAL_EXPENSE.text = "TOTAL EXPENSE: "+str(data["TOTAL_EXPENSE"])
@@ -49,7 +48,7 @@ func _on_SEND_pressed():
 	amount = str($AMOUNT.text)
 	desc = str($DESC.text)
 	
-	var datasend = "?date="+date+"&time="+time+"&cate="+cate+"&amount="+amount+"&desc="+desc
+	var datasend = "?date="+date+"&time="+time+"&cate="+cate+"&amount="+amount+"&desc="+desc+"&sheetname="+"DATA"
 	var headers = ["Content-Length: 0"]
 	var posturl = apiurl+datasend
 	$HTTPRequest.request(posturl,headers,true, HTTPClient.METHOD_POST)
