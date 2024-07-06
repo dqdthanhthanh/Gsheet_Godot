@@ -9,16 +9,18 @@ var amount = ""
 var desc = ""
 var respheader = ""
 var SEND = false
+
 var excel_file = "https://docs.google.com/spreadsheets/d/1BxOynf2MqJURThmiUzzOts4i360y1pUliJSAkjYljAE/edit?gid=0#gid=0"
-var idurl = "AKfycbyAZP-lPX5xgmj_BrxQ96GmPXB_1dKylRE9PhH1UcdYpBO68F01IFI-7VzbLvPHW205lg"
-var apiurl = "https://script.google.com/macros/s/" +idurl+ "/exec"
+var sheet_id = "1BxOynf2MqJURThmiUzzOts4i360y1pUliJSAkjYljAE"
+var app_script_id = "AKfycbyAZP-lPX5xgmj_BrxQ96GmPXB_1dKylRE9PhH1UcdYpBO68F01IFI-7VzbLvPHW205lg"
+var app_script_url = "https://script.google.com/macros/s/" + app_script_id+ "/exec"
 
 func _ready():
 	getdata()
 	
 func getdata():
 	$Label.text = "Fetching: "+"RESULTS"
-	$HTTPRequest.request(apiurl+"?sheetname="+"RESULTS")
+	$HTTPRequest.request(app_script_url+"?sheetname="+"RESULTS")
 	SEND = false
 
 func _on_HTTPRequest_request_completed(result, response_code, headers, body):
@@ -52,7 +54,7 @@ func _on_SEND_pressed():
 	var datasend = "?date="+date+"&time="+time+"&cate="+cate+"&amount="+amount+"&desc="+desc+"&sheetname="+"DATA"
 	prints(datasend)
 	var headers = ["Content-Length: 0"]
-	var posturl = apiurl+datasend
+	var posturl = app_script_url+datasend
 	$HTTPRequest.request(posturl,headers,true, HTTPClient.METHOD_POST)
 	SEND = true
 	$Label.text = "SEND COMPLETED"
