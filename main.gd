@@ -30,10 +30,12 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		respheader = headers
 		if response_code == 200:
 			$Label.text = "Fetched: "+"RESULTS"
-			var json = JSON.parse(body.get_string_from_utf8())
-			print(json.result)
-			var data = body.get_string_from_utf8()
-			data = parse_json(data)[0]
+			# Get data method 01
+#			var json = JSON.parse(body.get_string_from_utf8()).result[0]
+#			print(json)
+			# Get data method 02
+			var data = parse_json(body.get_string_from_utf8())[0]
+			print(data)
 			$CASH_IN_HAND.text = "CASH IN HAND:  "+str(data["TOTAL_CASH_IN_HAND"])
 			$TOTAL_INCOME.text = "TOTAL INCOME:  "+str(data["TOTAL_INCOME"])
 			$TOTAL_EXPENSE.text = "TOTAL EXPENSE: "+str(data["TOTAL_EXPENSE"])
